@@ -1,4 +1,3 @@
-
 function Generator() {
 
     const actions = {
@@ -7,22 +6,29 @@ function Generator() {
         addSign: '+',
         substractSign: '-'
     };
-
-    let copmlexityIndex = 0;
-
-    const copmlexity = [
+    const complexityLevels = [
         [1, 1],
         [2, 1],
         [2, 2],
     ];
+    let complexity = 0;
+    let currentLevels = [complexityLevels[complexity]];
 
-    this.getExpression = generateExpression.bind(null, copmlexity[copmlexityIndex]);
+    this.getExpression = isCorrect => {
+        const arr = getRandomItem(currentLevels);
+        return generateExpression(arr, isCorrect);
+    };
 
     this.levelUp = () => {
-        copmlexityIndex++;
-        if (copmlexity[copmlexityIndex]) {
-            this.getExpression = generateExpression.bind(null, copmlexity[copmlexityIndex]);
+        complexity++;
+        if (complexityLevels[complexity]) {
+            currentLevels.push(complexityLevels[complexity]);
         }
+    };
+
+    this.reset = () => {
+        complexity = 0;
+        currentLevels = [complexityLevels[complexity]];
     };
 
     function generateExpression(arr, isCorrect) {
@@ -35,6 +41,7 @@ function Generator() {
         const shown = isCorrect ? actual : getWrong(actual);
         const expression = `${a} ${actionSign} ${b} = ${shown}`;
         return {
+            complexity,
             isCorrect,
             actual,
             expression
@@ -72,6 +79,10 @@ function Generator() {
 
     function substract(a, b) {
         return a - b;
+    }
+
+    function getRandomItem(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
     }
 
 }

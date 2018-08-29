@@ -1,7 +1,6 @@
 const generator = new Generator();
-const game = new Game(generator);
-const world = new World(game);
-const ballManager = new BallManager(world, generator, Ball);
+const game = new Game(generator, Ball);
+const world = new World();
 const player = new Player(game, world.centerX, world.centerY);
 
 const scoreText = new Textfield({
@@ -9,6 +8,13 @@ const scoreText = new Textfield({
     y: world.height - 30,
     color: '#fff',
     fontSize: 36
+});
+const timerText = new Textfield({
+    x: world.width - 30,
+    y: world.height - 30,
+    color: '#fff',
+    fontSize: 36,
+    text: '12'
 });
 
 const toolbar = new Rect({
@@ -24,15 +30,17 @@ window.onkeypress = e => {
     init();
 };
 
-game.setScoreText(scoreText);
+game.setTextfields(scoreText, timerText);
+game.start(world);
 init();
 
 function init() {
+    generator.reset();
     player.reset();
     game.reset();
     world.reset();
     world.spawn(player);
     world.spawn(toolbar);
     world.spawn(scoreText);
-    ballManager.start();
+    world.spawn(timerText);
 }

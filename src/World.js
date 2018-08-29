@@ -1,36 +1,44 @@
-function World(game) {
+function World() {
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     const FPS_INTERVAL = 0.3;
     let objects = [];
     let staticObjects = [];
+    let isStopped = true;
     const bounds = {
         w: window.innerWidth - 8,
         h: window.innerHeight - 8
     };
     const callbacks = [];
     let tickTime = performance.now();
+    let lastTicks = 0;
     canvas.width = bounds.w;
     canvas.height = bounds.h;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    this.centerX = bounds.w/2;
-    this.centerY = bounds.h/2;
+    this.centerX = bounds.w / 2;
+    this.centerY = bounds.h / 2;
     this.width = bounds.w;
     this.height = bounds.h;
 
     this.add = obj => {
         if (obj.isStatic) {
             staticObjects.push(obj);
-        }else {
+        } else {
             objects.push(obj);
         }
     };
 
+    this.stop = () => {
+        isStopped = true;
+    };
+
     this.reset = () => {
+        isStopped = false;
         objects = [];
         staticObjects = [];
         tickTime = performance.now();
+        lastTicks = 0;
         loop(tickTime);
     };
 
@@ -78,11 +86,8 @@ function World(game) {
         return {x, y, vy, vx};
     }
 
-    this.addCallback(game.tick);
-    loop(tickTime);
-
     function loop(t) {
-        if (game.over) return;
+        if (lastTicks > 3) return;
         const elapsed = t - tickTime;
         update();
         if (elapsed > FPS_INTERVAL) {
@@ -91,6 +96,7 @@ function World(game) {
             render();
             notify();
         }
+        if (isStopped) lastTicks++;
         requestAnimationFrame(loop);
     }
 
@@ -121,9 +127,9 @@ function World(game) {
     }
 
     function chekcOtherObjects(obj, i) {
-        if (obj.done) return;
+        if (obj.done || obj.isYoung) return;
         objects.forEach((el, j) => {
-            if (j <= i || el.done) return;
+            if (j <= i || el.done || el.isYoung) return;
             const boom = obj.intersects(el);
             if (boom) {
                 const vx = obj.vx;

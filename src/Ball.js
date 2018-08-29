@@ -9,6 +9,7 @@ function Ball(id, data) {
     this.vy = 0;
     this.c = getRandomColor();
     this.isAlive = true;
+    this.isYoung = true;
     this.bumped = [];
 
     let ctx = null;
@@ -21,8 +22,10 @@ function Ball(id, data) {
         hor: false,
         vert: false
     };
+    const fontFactors = [0.45, 0.35, 0.3];
     const getFont = () => {
-        return `bold ${Math.round(this.r * 0.3)}px sans-serif`;
+        const fs = Math.round(this.r * fontFactors[data.complexity]);
+        return `bold ${fs}px sans-serif`;
     };
 
     this.render = () => {
@@ -69,7 +72,11 @@ function Ball(id, data) {
         }
         this.r += dr;
         this.r = this.r > maxR ? maxR : this.r;
-        if (this.r <= 0) this.isAlive = false;
+        if (this.r <= 0) {
+            this.isAlive = false;
+        }else if (this.r > 30) {
+            this.isYoung = false;
+        }
         if (this.x + this.r > bounds.w || this.x - this.r < 0) {
             if (!edgesBumped.vert) {
                 this.vx *= -1;
