@@ -4,9 +4,8 @@ function Player(game, x, y) {
     this.y = y;
     this.r = 50;
     this.id = 'player';
-    this.c1 = 'red';
-    this.c2 = 'green';
-    this.isAlive = true;
+    const color1 = '#611427';
+    const color2 = '#958976';
     let isInit = false;
     this.data = {
       isCorrect: null
@@ -28,21 +27,21 @@ function Player(game, x, y) {
     };
 
     this.reset = () => {
-        this.c1 = 'red';
-        this.c2 = 'green';
+        this.c1 = color1;
+        this.c2 = color2;
         this.isAlive = true;
-        let isInit = false;
+        isInit = false;
     };
 
     this.bump = (a, b, c, isCorrect) => {
         if (isCorrect) {
-            this.c1 = 'green';
+            this.c1 = color2;
             game.onCorrect();
             setTimeout(() => {
-                this.c1 = 'red';
+                this.c1 = color1;
             }, 500);
         }else {
-            this.c2 = 'red';
+            this.c2 = color1;
             game.onFail();
         }
     };

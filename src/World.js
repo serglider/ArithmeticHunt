@@ -6,8 +6,8 @@ function World() {
     let staticObjects = [];
     let isStopped = true;
     const bounds = {
-        w: window.innerWidth - 8,
-        h: window.innerHeight - 8
+        w: window.innerWidth,
+        h: window.innerHeight
     };
     const callbacks = [];
     let tickTime = performance.now();
@@ -31,6 +31,10 @@ function World() {
 
     this.stop = () => {
         isStopped = true;
+    };
+
+    this.isStopped = () => {
+        return isStopped;
     };
 
     this.reset = () => {

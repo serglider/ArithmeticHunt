@@ -1,3 +1,7 @@
+const help = document.querySelector('.help-outer');
+let isHelpShown = true;
+
+
 const generator = new Generator();
 const game = new Game(generator, Ball);
 const world = new World();
@@ -5,34 +9,39 @@ const player = new Player(game, world.centerX, world.centerY);
 
 const scoreText = new Textfield({
     x: world.centerX,
-    y: world.height - 30,
-    color: '#fff',
+    y: 30,
+    color: '#DDDCC5',
     fontSize: 36
 });
 const timerText = new Textfield({
-    x: world.width - 30,
-    y: world.height - 30,
-    color: '#fff',
+    x: world.width - 40,
+    y: 30,
+    color: '#DDDCC5',
     fontSize: 36,
     text: '12'
 });
 
 const toolbar = new Rect({
     x: 0,
-    y: world.height - 60,
+    y: 0,
     w: world.width,
     h: 60,
-    color: 'rgba(0,0,0,0.5)'
+    color: 'rgba(29,35,38,0.7)'
 });
 
-window.onkeypress = e => {
-    if (!game.over && e.keyCode !== 32) return;
-    init();
+window.onkeyup = e => {
+    if (world.isStopped()) {
+        if (e.keyCode === 32) {
+            if (isHelpShown) toggleHelp();
+            init();
+        } else if (e.keyCode === 27) {
+            toggleHelp();
+        }
+    }
 };
 
 game.setTextfields(scoreText, timerText);
 game.start(world);
-init();
 
 function init() {
     generator.reset();
@@ -43,4 +52,9 @@ function init() {
     world.spawn(toolbar);
     world.spawn(scoreText);
     world.spawn(timerText);
+}
+
+function toggleHelp() {
+    isHelpShown = !isHelpShown;
+    help.style.display = isHelpShown ? 'table' : 'none';
 }

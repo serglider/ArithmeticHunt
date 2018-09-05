@@ -35,11 +35,11 @@ function Ball(id, data) {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r, 0, PI2);
             ctx.fill();
-            ctx.fillStyle = '#eee';
+            ctx.fillStyle = '#DDDCC5';
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r * 0.9, 0, PI2);
             ctx.fill();
-            ctx.fillStyle = '#333';
+            ctx.fillStyle = '#1D2326';
             ctx.font = getFont();
             ctx.fillText(data.expression, this.x, this.y);
         }
