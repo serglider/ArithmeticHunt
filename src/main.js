@@ -1,9 +1,9 @@
 const help = document.querySelector('.help-outer');
 let isHelpShown = true;
 
-
+const colorGen = new ColorGenerator();
 const generator = new Generator();
-const game = new Game(generator, Ball);
+const game = new Game(generator, colorGen, Ball);
 const world = new World();
 const player = new Player(game, world.centerX, world.centerY);
 
@@ -58,3 +58,8 @@ function toggleHelp() {
     isHelpShown = !isHelpShown;
     help.style.display = isHelpShown ? 'table' : 'none';
 }
+
+
+// TODO Small screenshot (160px × 160px):
+//
+// Big screenshot (400px × 250px):

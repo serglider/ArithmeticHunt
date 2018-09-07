@@ -1,7 +1,7 @@
-function Game(generator, BallClass) {
+function Game(generator, colorGen, BallClass) {
 
     let score = 0;
-    let timerCount = 12;
+    let timerCount = 15;
     let scoreText, timerText;
     let startTime = Date.now();
     let isCorrect = true;
@@ -61,7 +61,8 @@ function Game(generator, BallClass) {
         const id = getRandomID();
         isCorrect = !isCorrect;
         const expression = generator.getExpression(isCorrect);
-        const ball = new BallClass(id, expression);
+        const colors = colorGen.getColors();
+        const ball = new BallClass(id, expression, colors);
         world.spawn(ball);
     }
 

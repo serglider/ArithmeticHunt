@@ -1,4 +1,4 @@
-function Ball(id, data) {
+function Ball(id, data, colors) {
 
     this.id = id;
     this.data = data;
@@ -7,14 +7,14 @@ function Ball(id, data) {
     this.r = 10;
     this.vx = 0;
     this.vy = 0;
-    this.c = getRandomColor();
+    this.c = colors.base;
+    this.ct = colors.invert;
     this.isAlive = true;
     this.isYoung = true;
     this.bumped = [];
-
-    let ctx = null;
-    let bounds = null;
     this.done = false;
+
+    let ctx, bounds;
     let count = 0;
     const maxR = 120;
     const PI2 = 2 * Math.PI;
@@ -30,16 +30,12 @@ function Ball(id, data) {
 
     this.render = () => {
         if (this.isAlive) {
-
             ctx.fillStyle = this.c;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r, 0, PI2);
             ctx.fill();
-            ctx.fillStyle = '#DDDCC5';
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.r * 0.9, 0, PI2);
             ctx.fill();
-            ctx.fillStyle = '#1D2326';
+            ctx.fillStyle = this.ct;
             ctx.font = getFont();
             ctx.fillText(data.expression, this.x, this.y);
         }
@@ -48,6 +44,7 @@ function Ball(id, data) {
     this.bump = (id, vx, vy) => {
         if (!this.bumped.includes(id)) {
             this.c = 'red';
+            this.ct = 'red';
             this.vx = vx * 1.1;
             this.vy = vy * 1.1;
             this.bumped.push(id);
@@ -74,7 +71,7 @@ function Ball(id, data) {
         this.r = this.r > maxR ? maxR : this.r;
         if (this.r <= 0) {
             this.isAlive = false;
-        }else if (this.r > 30) {
+        } else if (this.r > 30) {
             this.isYoung = false;
         }
         if (this.x + this.r > bounds.w || this.x - this.r < 0) {
@@ -106,14 +103,4 @@ function Ball(id, data) {
     function dist(a, b) {
         return Math.hypot(a.x - b.x, a.y - b.y);
     }
-
-    function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
 }
