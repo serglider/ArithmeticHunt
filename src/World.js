@@ -65,26 +65,26 @@ function World() {
             case 0:
                 x = getRandomInt(0, bounds.w);
                 y = 0;
-                vx = getRandomInt(-4, 4);
-                vy = getRandomInt(-4, -1);
+                vx = getRandomInt(-5, 5);
+                vy = getRandomInt(-5, -1);
                 break;
             case 1:
                 x = bounds.w;
                 y = getRandomInt(0, bounds.h);
-                vx = getRandomInt(1, 4);
-                vy = getRandomInt(-4, 4);
+                vx = getRandomInt(1, 5);
+                vy = getRandomInt(-5, 5);
                 break;
             case 2:
                 x = getRandomInt(0, bounds.w);
                 y = bounds.h;
-                vx = getRandomInt(-4, 4);
-                vy = getRandomInt(1, 4);
+                vx = getRandomInt(-5, 5);
+                vy = getRandomInt(1, 5);
                 break;
             case 3:
                 x = 0;
                 y = getRandomInt(0, bounds.h);
-                vx = getRandomInt(-4, -1);
-                vy = getRandomInt(-4, 4);
+                vx = getRandomInt(-5, -1);
+                vy = getRandomInt(-5, 5);
                 break;
         }
         return {x, y, vy, vx};

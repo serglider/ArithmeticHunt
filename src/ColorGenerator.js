@@ -1,10 +1,9 @@
 function ColorGenerator() {
     const mix = {
-        r: 60,
-        g: 150,
-        b: 200
+        r: 25,
+        g: 10,
+        b: 0
     };
-    // TODO color pallette
     const getRandColor = getRandomInt.bind(null, 0, 255);
 
     this.getColors = () => {

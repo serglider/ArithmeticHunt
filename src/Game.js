@@ -5,7 +5,7 @@ function Game(generator, colorGen, BallClass) {
     let scoreText, timerText;
     let startTime = Date.now();
     let isCorrect = true;
-    let ballsNumber = 7;
+    let ballsNumber = 8;
     let world;
 
     this.onCorrect = () => {
@@ -13,10 +13,8 @@ function Game(generator, colorGen, BallClass) {
         timerCount = 12;
         score++;
         scoreText.setText(`SCORE: ${score}`);
-        if (score === 20 || score === 30) {
-            generator.levelUp();
-        }
-        ballsNumber = Math.floor(score / 15) + 7;
+        if (score%10 === 0) generator.levelUp();
+        ballsNumber = Math.floor(score / 15) + 8;
     };
 
     this.onFail = () => {

@@ -3,13 +3,18 @@ function Generator() {
     const actions = {
         add,
         substract,
+        multiply,
         addSign: '+',
-        substractSign: '-'
+        substractSign: '-',
+        multiplySign: '*'
     };
     const complexityLevels = [
-        [1, 1],
-        [2, 1],
-        [2, 2],
+        [1, 1, 0],
+        [1, 1, 1],
+        [2, 1, 0],
+        [2, 1, 1],
+        [2, 2, 0],
+        [2, 2, 1],
     ];
     let complexity = 0;
     let currentLevels = [complexityLevels[complexity]];
@@ -35,7 +40,7 @@ function Generator() {
         const a = generateNumber(arr[0]);
         const b = generateNumber(arr[1]);
 
-        const action = generateAction();
+        const action = generateAction(arr[2]);
         const actionSign = actions[`${action}Sign`];
         const actual = actions[action](+a, +b);
         const shown = isCorrect ? actual : getWrong(actual);
@@ -59,8 +64,10 @@ function Generator() {
         return result;
     }
 
-    function generateAction() {
-        return Math.random() > 0.5 ? 'add' : 'substract';
+    function generateAction(isMultAllowed) {
+        const actions = ['substract', 'add', 'multiply'];
+        if (!isMultAllowed) actions.pop();
+        return getRandomItem(actions);
     }
 
     function generateNumber(length = 1) {
@@ -79,6 +86,10 @@ function Generator() {
 
     function substract(a, b) {
         return a - b;
+    }
+
+    function multiply(a, b) {
+        return a * b;
     }
 
     function getRandomItem(arr) {
