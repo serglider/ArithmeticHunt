@@ -1,6 +1,6 @@
 {
   "name": "arithmetic-hunt",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "game - an entry for 2018 js13k contest",
   "main": "",
   "scripts": {
