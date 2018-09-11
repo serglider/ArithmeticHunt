@@ -8,7 +8,7 @@
 - Small balls are neither dangerous nor count as correct ones.
 - As the games goes, the expressions become a bit more complicated and their number increases.
 - To show / hide help (while the game is over) use ```ESC```
-- To start / restart the game hit ```SPACE```.Good luck!
+- To start / restart the game hit ```SPACE```.
 
 **Good luck!**
 
