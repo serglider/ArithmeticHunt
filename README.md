@@ -1,4 +1,8 @@
   # Arithmetic Hunt
+  The game is an entry for the 2018 Js13kGames coding competition.
+  
+  ###Rules
+  
 - Move your circle by mouse in order to hit the right expressions and to avoid the incorrect ones.
 - Think fast! You have 15 seconds to find next correct expression.
 - Small balls are neither dangerous nor count as correct ones.
@@ -7,3 +11,10 @@
 - To start / restart the game hit ```SPACE```.Good luck!
 
 **Good luck!**
+
+###Installation
+
+1. Clone the repo
+2. ```npm install```
+3. ```gulp```
+4. Enjoy

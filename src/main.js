@@ -58,8 +58,3 @@ function toggleHelp() {
     isHelpShown = !isHelpShown;
     help.style.display = isHelpShown ? 'table' : 'none';
 }
-
-
-// TODO Small screenshot (160px × 160px):
-//
-// Big screenshot (400px × 250px):
