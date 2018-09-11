@@ -18,3 +18,9 @@
 2. ```npm install```
 3. ```gulp```
 4. Enjoy
+
+### License
+
+The MIT License (MIT)
+
+Copyright (c) 2018 Sergey Chernykh
