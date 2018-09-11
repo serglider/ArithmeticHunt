@@ -1,7 +1,7 @@
   # Arithmetic Hunt
   The game is an entry for the 2018 Js13kGames coding competition.
   
-  ###Rules
+  ### Rules
   
 - Move your circle by mouse in order to hit the right expressions and to avoid the incorrect ones.
 - Think fast! You have 15 seconds to find next correct expression.
@@ -12,7 +12,7 @@
 
 **Good luck!**
 
-###Installation
+### Installation
 
 1. Clone the repo
 2. ```npm install```
